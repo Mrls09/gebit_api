@@ -1,11 +1,13 @@
 package mx.edu.utez.gebit.models.laboratory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mx.edu.utez.gebit.models.building.Building;
-
+import mx.edu.utez.gebit.models.computer.Computer;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "laboratory")
@@ -25,11 +27,16 @@ public class Laboratory {
     @JoinColumn(name = "building_id")
     private Building building;
 
+    @OneToMany(mappedBy = "laboratory", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonIgnore
+    private List<Computer> computerList;
 
-    public Laboratory(Long id, String name, Integer capacity, Building building) {
+
+    public Laboratory(Long id, String name, Integer capacity, Building building, List<Computer> computerList) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
         this.building = building;
+        this.computerList = computerList;
     }
 }

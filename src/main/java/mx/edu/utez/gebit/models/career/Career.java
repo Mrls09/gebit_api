@@ -25,7 +25,7 @@ public class Career {
     @Column(nullable = false, length = 20)
     private String abbreviation;
 
-    @OneToMany
+    @OneToMany(mappedBy = "career", cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JsonIgnore
     private List<Group> groupList;
 

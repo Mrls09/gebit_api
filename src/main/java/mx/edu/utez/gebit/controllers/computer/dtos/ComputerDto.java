@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mx.edu.utez.gebit.models.brand.Brand;
 import mx.edu.utez.gebit.models.computer.Computer;
+import mx.edu.utez.gebit.models.laboratory.Laboratory;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -26,13 +27,16 @@ public class ComputerDto {
     private String description;
     private Brand brand;
 
+    private Laboratory laboratory;
+
     public Computer getComputer(){
         return new Computer(
                 getId(),
                 getSerial(),
                 getModel(),
                 getDescription(),
-                getBrand()
+                getBrand(),
+                getLaboratory()
         );
     }
 }

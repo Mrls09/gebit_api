@@ -14,4 +14,6 @@ public interface ComputerRepository extends JpaRepository<Computer, Long> {
 
     Optional<Computer> findBySerial(String serial);
 
+    Optional<Computer> findAllByBrand(Long id);
+
 }
