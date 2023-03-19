@@ -32,6 +32,7 @@ public class Computer {
     @JoinColumn(name = "id_laboratory", nullable = false)
     private Laboratory laboratory;
 
+
     public Computer(Long id, String serial, String model, String description, Brand brand, Laboratory laboratory) {
         this.id = id;
         this.serial = serial;

@@ -26,8 +26,6 @@ public class ComputerService {
                 "OK"
         );
     }
-
-
     @Transactional(rollbackFor = {SQLException.class})
     public Response<Computer> insert(Computer computer){
         Optional<Computer> exist = this.repository.findBySerial(computer.getSerial());

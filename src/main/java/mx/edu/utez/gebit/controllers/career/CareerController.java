@@ -7,6 +7,7 @@ import mx.edu.utez.gebit.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class CareerController {
                 HttpStatus.OK
         );
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
     public ResponseEntity<Response<Career>> insert(@RequestBody CareerDto career){
         return new ResponseEntity<>(
@@ -42,6 +43,7 @@ public class CareerController {
         );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/")
     public ResponseEntity<Response<Career>> update(@RequestBody CareerDto career){
         return new ResponseEntity<>(

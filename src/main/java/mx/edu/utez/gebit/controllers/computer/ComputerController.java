@@ -8,6 +8,7 @@ import mx.edu.utez.gebit.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class ComputerController {
                 HttpStatus.OK
         );
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
     public ResponseEntity<Response<Computer>> insert(@RequestBody ComputerDto computer){
         return new ResponseEntity<>(
@@ -40,6 +42,7 @@ public class ComputerController {
                 HttpStatus.CREATED
         );
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/")
     public ResponseEntity<Response<Computer>> update(@RequestBody ComputerDto computer){
         return new ResponseEntity<>(

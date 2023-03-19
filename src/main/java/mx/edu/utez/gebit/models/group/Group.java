@@ -21,11 +21,9 @@ public class Group {
     private Integer degree;
     @Column(nullable = false)
     private String letter;
-
     @ManyToOne
     @JoinColumn(name = "id_career", nullable = false)
     private Career career;
-
 
     public Group(Long id, Integer degree, String letter, Career career) {
         this.id = id;
