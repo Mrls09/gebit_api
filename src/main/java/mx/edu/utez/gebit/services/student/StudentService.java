@@ -102,6 +102,11 @@ public class StudentService {
                     "Estudiante no encontrado"
             );
         }
+        student.getUser().setPassword(
+                encoder.encode(
+                        student.getUser().getPassword()
+                )
+        );
         return new Response<>(
                 this.repository.saveAndFlush(student),
                 false,

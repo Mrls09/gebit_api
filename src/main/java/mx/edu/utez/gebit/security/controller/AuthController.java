@@ -3,7 +3,9 @@ package mx.edu.utez.gebit.security.controller;
 import mx.edu.utez.gebit.security.dto.JwtDto;
 import mx.edu.utez.gebit.security.dto.LoginUser;
 import mx.edu.utez.gebit.security.dto.NewUser;
+import mx.edu.utez.gebit.security.entity.User;
 import mx.edu.utez.gebit.security.jwt.JwtProvider;
+import mx.edu.utez.gebit.security.repository.UserRepository;
 import mx.edu.utez.gebit.security.service.RolService;
 import mx.edu.utez.gebit.security.service.UserService;
 import mx.edu.utez.gebit.utils.Response;
@@ -21,7 +23,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.SQLOutput;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 @RestController
@@ -61,7 +65,13 @@ public class AuthController {
         data.put("user", userDetails);
         System.out.println("TOKEN->" + jwt);
         return new ResponseEntity<>(jwtDto,HttpStatus.OK);
-
+    }
+    @PostMapping("/reset-password")
+    public ResponseEntity<Response<User>> changeUserPassword(@RequestBody LoginUser loginUser) {
+        return new ResponseEntity<>(
+                this.userService.updatePassword(loginUser.getUsername(),loginUser.getPassword(), loginUser.getNewPass()),
+                HttpStatus.OK
+        );
     }
 
 }

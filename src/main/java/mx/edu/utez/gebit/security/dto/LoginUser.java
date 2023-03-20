@@ -7,6 +7,7 @@ public class LoginUser {
     private String username;
     @NotBlank
     private String password;
+    private String newPass;
 
     public String getUsername(){
         return username;
@@ -19,5 +20,13 @@ public class LoginUser {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNewPass() {
+        return newPass;
+    }
+
+    public void setNewPass(String newPass) {
+        this.newPass = newPass;
     }
 }
