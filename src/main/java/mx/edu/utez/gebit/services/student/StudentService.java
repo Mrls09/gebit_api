@@ -1,5 +1,6 @@
 package mx.edu.utez.gebit.services.student;
 
+import mx.edu.utez.gebit.controllers.student.studentDto.StudentDto;
 import mx.edu.utez.gebit.models.student.Student;
 import mx.edu.utez.gebit.models.student.StudentRepository;
 import mx.edu.utez.gebit.security.entity.Rol;
@@ -94,6 +95,7 @@ public class StudentService {
     }
     @Transactional(rollbackFor = {SQLException.class})
     public Response<Student> update(Student student){
+        Student student1 = repository.findById(student.getId()).get();
         if(!this.repository.existsById(student.getId())){
             return new Response<>(
                     null,
@@ -102,13 +104,27 @@ public class StudentService {
                     "Estudiante no encontrado"
             );
         }
-        student.getUser().setPassword(
-                encoder.encode(
-                        student.getUser().getPassword()
-                )
-        );
+        /*if(student.getUser().getPassword() != null){
+            student.getUser().setPassword(
+                    encoder.encode(
+                            student.getUser().getPassword()
+                    )
+            );
+        }
+        Set<Rol> roles = new HashSet<>();
+        roles.add(rolService.getByRolName(RolName.ROLE_USER).get());
+        student.getUser().setRoles(roles);*/
+        if(student.getLastname()!=null){
+            student1.setLastname(student.getLastname());
+            System.out.println("SI TRAE APELLIDO");
+        }
+        if(student.getName()!=null){
+            student1.setName(student.getName());
+            System.out.println("SI TRAE NOMBRE");
+        }
+
         return new Response<>(
-                this.repository.saveAndFlush(student),
+                this.repository.saveAndFlush(student1),
                 false,
                 200,
                 "Se ha actualizado correctamente el estudiante"

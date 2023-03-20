@@ -1,5 +1,7 @@
 package mx.edu.utez.gebit.models.student;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,11 +29,8 @@ public class Student {
     @ManyToOne()
     @JoinColumn(name = "group_id")
     private Group group;
-
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
     private User user;
-
-
     public Student(Long id, String name, String lastname, Boolean status, Group group, User user) {
         this.id = id;
         this.name = name;
