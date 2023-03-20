@@ -17,6 +17,15 @@ JSON POST USER-STUDENT
         "password":"123456789"
     }
 }
+JSON PUT UPDATE STUDENT ONLY NAME OR LASTNAME OR BOTH
+{
+    "id":11,
+    "name":"nombre",
+    "lastname": "apellido",
+    "user":{
+        "id":18
+    }
+}
 
 JSON POST /auth/reset-password FOR USER 
 {
@@ -24,3 +33,14 @@ JSON POST /auth/reset-password FOR USER
     "password":"123456789",
     "newPass":"0000000000"
  }
+ 
+ JSON POST BITACORA /bitacora/
+ {
+    "computer":{
+        "id":1
+    },
+    "user":{
+        "id":6
+    }
+}
+ 
