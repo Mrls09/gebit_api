@@ -17,3 +17,10 @@ JSON POST USER-STUDENT
         "password":"123456789"
     }
 }
+
+JSON POST /reset-password FOR USER 
+{
+    "username":"20213tn073@utez.edu.mx",
+    "password":"123456789",
+    "newPass":"0000000000"
+ }
