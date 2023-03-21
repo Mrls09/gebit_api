@@ -22,7 +22,7 @@ public class Brand {
     @Column(nullable = false,length = 100)
     private String name;
 
-    @OneToMany(mappedBy = "brand", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Computer> computerList;
 

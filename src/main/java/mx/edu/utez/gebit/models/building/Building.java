@@ -25,7 +25,7 @@ public class Building {
         this.id = id;
         this.name = name;
     }
-    @OneToMany(mappedBy = "building", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Laboratory> laboratoryList;
 

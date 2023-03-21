@@ -3,7 +3,9 @@ package mx.edu.utez.gebit.security.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import mx.edu.utez.gebit.controllers.teacher.teacherDto.TeacherDto;
 import mx.edu.utez.gebit.models.student.Student;
+import mx.edu.utez.gebit.models.teacher.Teacher;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -39,5 +41,9 @@ public class User {
     @JsonIgnore
     private Student student;
 
+    @OneToOne
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id",unique = true)
+    @JsonIgnore
+    private Teacher teacher;
 
 }

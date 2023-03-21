@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 /*
 @Component
 public class CreateRoles implements CommandLineRunner {
+
     @Autowired
     RolService rolService;
 
@@ -16,8 +17,10 @@ public class CreateRoles implements CommandLineRunner {
     public void run(String... args)throws Exception {
         Rol rolAdmin = new Rol(RolName.ROLE_ADMIN);
         Rol rolUser = new Rol(RolName.ROLE_USER);
+        Rol rolTeacher = new Rol(RolName.ROLE_TEACHER);
         rolService.save(rolAdmin);
         rolService.save(rolUser);
+        rolService.save(rolTeacher);
     }
 }
 */

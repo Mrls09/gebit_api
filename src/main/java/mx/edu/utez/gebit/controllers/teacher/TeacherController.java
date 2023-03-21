@@ -1,8 +1,8 @@
-package mx.edu.utez.gebit.controllers.student;
+package mx.edu.utez.gebit.controllers.teacher;
 
-import mx.edu.utez.gebit.controllers.student.studentDto.StudentDto;
-import mx.edu.utez.gebit.models.student.Student;
-import mx.edu.utez.gebit.services.student.StudentService;
+import mx.edu.utez.gebit.controllers.teacher.teacherDto.TeacherDto;
+import mx.edu.utez.gebit.models.teacher.Teacher;
+import mx.edu.utez.gebit.services.teacher.TeacherService;
 import mx.edu.utez.gebit.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,42 +13,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api-gebit/student")
+@RequestMapping("/api-gebit/teacher")
 @CrossOrigin(origins = {"*"})
-public class StudentController {
+public class TeacherController {
     @Autowired
-    private StudentService service;
-
-    @PreAuthorize("hasRole({'ADMIN' , 'TEACHER'})")
+    private TeacherService service;
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/")
-    public ResponseEntity<Response<List<Student>>> getAll(){
+    public ResponseEntity<Response<List<Teacher>>> getAll(){
         return new ResponseEntity<>(
                 this.service.getAll(),
                 HttpStatus.OK
         );
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Response<Student>> getOne(@PathVariable("id") Long id){
+    public ResponseEntity<Response<Teacher>> getOne(@PathVariable("id") Long id){
         return new ResponseEntity<>(
                 this.service.getOne(id),
                 HttpStatus.OK
         );
     }
     @PostMapping("/")
-    public ResponseEntity<Response<Student>> insert(@RequestBody StudentDto student){
+    public ResponseEntity<Response<Teacher>> insert(@RequestBody TeacherDto teacher){
         return new ResponseEntity<>(
-                this.service.insert(student.getStudent()),
+                this.service.insert(teacher.getTeacher()),
                 HttpStatus.CREATED
         );
     }
     @PutMapping("/")
-    public ResponseEntity<Response<Student>> update(@RequestBody StudentDto student){
+    public ResponseEntity<Response<Teacher>> update(@RequestBody TeacherDto teacher){
         return new ResponseEntity<>(
-                this.service.update(student.getStudent()),
+                this.service.update(teacher.getTeacher()),
                 HttpStatus.OK
         );
     }
-
-
-
 }

@@ -27,7 +27,7 @@ public class Laboratory {
     @JoinColumn(name = "building_id")
     private Building building;
 
-    @OneToMany(mappedBy = "laboratory", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "laboratory", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Computer> computerList;
 
