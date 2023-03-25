@@ -48,8 +48,12 @@ JSON POST /auth/reset-password FOR USER
 *get students with group specific -> /student/grupo/{id} 
 
 
-*get students dependy status -> /student/status/{status} (Value Boolean)  
+*get students with status -> /student/status/{status} (Value Boolean)  
 
 
 *get laboratory with building specific -> /laboratory/builging/{id}
+
+*get bitacora depending of the computer -> /bitacora/computer/{id} 
+
+*get bitacora depending of the user -> /bitacora/user/{id}
 
