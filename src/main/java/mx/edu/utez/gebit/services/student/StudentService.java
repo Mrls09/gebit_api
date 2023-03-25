@@ -58,6 +58,24 @@ public class StudentService {
                 "Estudiante no encontrado"
         );
     }
+    @Transactional
+    public Response<List<Student>> getAllByStatus(Boolean status){
+        return new Response<>(
+                this.repository.findAllByStatus(status),
+                false,
+                200,
+                "OK"
+        );
+    }
+    @Transactional
+    public Response<List<Student>> getAllByGroup(Long id){
+        return new Response<>(
+                this.repository.findAllByGroup(id),
+                false,
+                200,
+                "OK"
+        );
+    }
     @Transactional(rollbackFor = {SQLException.class})
     public Response<Student> insert(Student student){
         Optional<User> exist = this.userRepository.findByUsername(student.getUser().getUsername());

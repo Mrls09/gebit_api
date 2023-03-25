@@ -20,6 +20,7 @@ public class BuildingController {
     @Autowired
     private BuildingService service;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/")
     public ResponseEntity<Response<List<Building>>> getAll(){
         return new ResponseEntity<>(
@@ -27,6 +28,7 @@ public class BuildingController {
                 HttpStatus.OK
         );
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Response<Building>> getOne(@PathVariable("id") Long id){
         return new ResponseEntity<>(

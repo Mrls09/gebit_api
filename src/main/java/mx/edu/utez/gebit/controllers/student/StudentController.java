@@ -1,6 +1,7 @@
 package mx.edu.utez.gebit.controllers.student;
 
 import mx.edu.utez.gebit.controllers.student.studentDto.StudentDto;
+import mx.edu.utez.gebit.models.group.Group;
 import mx.edu.utez.gebit.models.student.Student;
 import mx.edu.utez.gebit.services.student.StudentService;
 import mx.edu.utez.gebit.utils.Response;
@@ -19,7 +20,7 @@ public class StudentController {
     @Autowired
     private StudentService service;
 
-    @PreAuthorize("hasRole({'ADMIN' , 'TEACHER'})")
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('TEACHER')")
     @GetMapping("/")
     public ResponseEntity<Response<List<Student>>> getAll(){
         return new ResponseEntity<>(
@@ -34,6 +35,15 @@ public class StudentController {
                 HttpStatus.OK
         );
     }
+    /*@RequestMapping(value = "/group", method = RequestMethod.GET, params = "id")
+    public ResponseEntity<Response<List<Student>>> getAllByGroup(@RequestParam("id") Long id){
+        System.out.println("ID ->" + id);
+        return new ResponseEntity<>(
+                this.service.getAllByGroup(id),
+                HttpStatus.OK
+        );
+    }*/
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('USER')")
     @PostMapping("/")
     public ResponseEntity<Response<Student>> insert(@RequestBody StudentDto student){
         return new ResponseEntity<>(
@@ -41,6 +51,7 @@ public class StudentController {
                 HttpStatus.CREATED
         );
     }
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('USER')")
     @PutMapping("/")
     public ResponseEntity<Response<Student>> update(@RequestBody StudentDto student){
         return new ResponseEntity<>(

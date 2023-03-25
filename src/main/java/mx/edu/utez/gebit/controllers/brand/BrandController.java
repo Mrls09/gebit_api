@@ -19,6 +19,7 @@ public class BrandController {
     @Autowired
     private BrandService service;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/")
     public ResponseEntity<Response<List<Brand>>> getAll(){
         return new ResponseEntity<>(
@@ -26,6 +27,7 @@ public class BrandController {
                 HttpStatus.OK
         );
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Response<Brand>> getOne(@PathVariable("id") Long id){
         return new ResponseEntity<>(

@@ -63,6 +63,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api-gebit/auth/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api-gebit/reset-password").permitAll()//Permite apuntar sin necesidad de token
                 .antMatchers(HttpMethod.POST,"/api-gebit/student/").permitAll()
+                .antMatchers(HttpMethod.GET, "/api-gebit/group/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)

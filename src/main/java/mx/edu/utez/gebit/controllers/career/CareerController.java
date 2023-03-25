@@ -19,7 +19,7 @@ public class CareerController {
 
     @Autowired
     private CareerService service;
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/")
     public ResponseEntity<Response<List<Career>>> getAll(){
         return new ResponseEntity<>(
@@ -27,6 +27,7 @@ public class CareerController {
                 HttpStatus.OK
         );
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Response<Career>> getOne(@PathVariable("id") Long id){
         return new ResponseEntity<>(
