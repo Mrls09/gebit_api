@@ -35,14 +35,21 @@ public class StudentController {
                 HttpStatus.OK
         );
     }
-    /*@RequestMapping(value = "/group", method = RequestMethod.GET, params = "id")
-    public ResponseEntity<Response<List<Student>>> getAllByGroup(@RequestParam("id") Long id){
-        System.out.println("ID ->" + id);
+    @GetMapping("grupo/{id}")
+    public ResponseEntity<Response<List<Student>>> getAllByGroup(@PathVariable Long id){
         return new ResponseEntity<>(
                 this.service.getAllByGroup(id),
                 HttpStatus.OK
         );
-    }*/
+    }
+    @GetMapping("status/{status}")
+    public ResponseEntity<Response<List<Student>>> getAllByStatus(@PathVariable Boolean status){
+        return new ResponseEntity<>(
+                this.service.getAllByStatus(status),
+                HttpStatus.OK
+        );
+    }
+
     @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('USER')")
     @PostMapping("/")
     public ResponseEntity<Response<Student>> insert(@RequestBody StudentDto student){

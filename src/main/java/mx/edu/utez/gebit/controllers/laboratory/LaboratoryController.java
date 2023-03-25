@@ -32,6 +32,13 @@ public class LaboratoryController {
                 HttpStatus.OK
         );
     }
+    @GetMapping("building/{id}")
+    public ResponseEntity<Response<List<Laboratory>>> getAllByBuilding(@PathVariable Long id){
+        return new ResponseEntity<>(
+                this.service.getAllByBuilding(id),
+                HttpStatus.OK
+        );
+    }
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
     public ResponseEntity<Response<Laboratory>> insert(@RequestBody LaboratoryDto laboratory){

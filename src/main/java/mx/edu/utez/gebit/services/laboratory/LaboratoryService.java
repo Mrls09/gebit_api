@@ -27,6 +27,15 @@ public class LaboratoryService {
                 "OK"
         );
     }
+    @Transactional(readOnly = true)
+    public Response<List<Laboratory>> getAllByBuilding(Long id){
+        return new Response<>(
+                this.repository.findAllByBuilding(id),
+                false,
+                200,
+                "OK"
+        );
+    }
     @Transactional(rollbackFor = {SQLException.class})
     public Response<Laboratory> insert(Laboratory laboratory){
         Optional<Laboratory> exist = this.repository.findByName(laboratory.getName());

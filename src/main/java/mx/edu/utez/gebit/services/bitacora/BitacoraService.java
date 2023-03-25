@@ -51,4 +51,22 @@ public class BitacoraService {
                 "Bitacora Registrada"
         );
     }
+    @Transactional(readOnly = true)
+    public Response<List<Bitacora>> getAllByUser(Long id){
+        return new Response<>(
+                this.repository.findAllByUser(id),
+                false,
+                200,
+                "OK"
+        );
+    }
+    @Transactional(readOnly = true)
+    public Response<List<Bitacora>> getAllByComputer(Long id){
+        return new Response<>(
+                this.repository.findAllByComputer(id),
+                false,
+                200,
+                "OK"
+        );
+    }
 }

@@ -32,6 +32,20 @@ public class BitacoraController {
                 HttpStatus.OK
         );
     }
+    @GetMapping("user/{id}")
+    public ResponseEntity<Response<List<Bitacora>>> getAllByUser(@PathVariable Long id){
+        return new ResponseEntity<>(
+                this.service.getAllByUser(id),
+                HttpStatus.OK
+        );
+    }
+    @GetMapping("computer/{id}")
+    public ResponseEntity<Response<List<Bitacora>>> getAllByComputer(@PathVariable Long id){
+        return new ResponseEntity<>(
+                this.service.getAllByComputer(id),
+                HttpStatus.OK
+        );
+    }
 
     @PostMapping("/")
     public ResponseEntity<Response<Bitacora>> insert(@RequestBody BitacoraDto bitacora){
