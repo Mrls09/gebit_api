@@ -54,7 +54,7 @@ public class AuthController {
         }
     }*/
     @PostMapping("/login")
-    public ResponseEntity<Response<Object>> login(@Valid @RequestBody LoginUser loginUser){
+    public ResponseEntity<Object> login(@Valid @RequestBody LoginUser loginUser){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(),loginUser.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generateToken(authentication);
@@ -70,7 +70,7 @@ public class AuthController {
         }else if(rol.equals("[ROLE_TEACHER]")){
             data.put("teacher" , userService.getByUser(userDetails.getUsername()).get().getTeacher());
         }
-        return new ResponseEntity<>(new Response<>(data,false,200,"OK"),HttpStatus.OK);
+        return new ResponseEntity<>(data,HttpStatus.OK);
     }
     @PostMapping("/reset-password")
     public ResponseEntity<Response<User>> changeUserPassword(@RequestBody LoginUser loginUser) {
