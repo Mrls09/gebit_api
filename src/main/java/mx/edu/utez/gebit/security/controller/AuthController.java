@@ -54,7 +54,7 @@ public class AuthController {
         }
     }*/
     @PostMapping("/login")
-    public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUser loginUser){
+    public ResponseEntity<Response<Object>> login(@Valid @RequestBody LoginUser loginUser){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(),loginUser.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generateToken(authentication);
@@ -62,9 +62,15 @@ public class AuthController {
         JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(),userDetails.getAuthorities());
         Map<String, Object> data = new HashMap<>();
         data.put("token", jwt);
-        data.put("user", userDetails);
-        System.out.println("TOKEN->" + jwt);
-        return new ResponseEntity<>(jwtDto,HttpStatus.OK);
+        data.put("user", userService.getByUser(userDetails.getUsername()));
+        String rol = userDetails.getAuthorities().toString();
+        if(rol.equals("[ROLE_USER]")){
+            //userService.getByUser(userDetails.getUsername()).get().getRoles()
+            data.put("student" , userService.getByUser(userDetails.getUsername()).get().getStudent());
+        }else if(rol.equals("[ROLE_TEACHER]")){
+            data.put("teacher" , userService.getByUser(userDetails.getUsername()).get().getTeacher());
+        }
+        return new ResponseEntity<>(new Response<>(data,false,200,"OK"),HttpStatus.OK);
     }
     @PostMapping("/reset-password")
     public ResponseEntity<Response<User>> changeUserPassword(@RequestBody LoginUser loginUser) {

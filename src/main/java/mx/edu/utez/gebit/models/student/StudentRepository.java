@@ -16,7 +16,6 @@ public interface StudentRepository extends JpaRepository<Student , Long> {
     @Query(value = "SELECT * FROM student s WHERE s.group_id LIKE %?1%" , nativeQuery = true)
     List<Student> findAllByGroup(Long group_id);
 
-
     //List<Student> findAllBy
 
 }
