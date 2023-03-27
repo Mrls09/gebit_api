@@ -23,7 +23,8 @@ public class Computer {
     private String model;
     @Column
     private String description;
-
+    @Column
+    private Integer numberPc;
     @ManyToOne
     @JoinColumn(name = "id_brand", nullable = false)
     private Brand brand;
@@ -33,11 +34,12 @@ public class Computer {
     private Laboratory laboratory;
 
 
-    public Computer(Long id, String serial, String model, String description, Brand brand, Laboratory laboratory) {
+    public Computer(Long id, String serial, String model, String description, Integer numberPc, Brand brand, Laboratory laboratory) {
         this.id = id;
         this.serial = serial;
         this.model = model;
         this.description = description;
+        this.numberPc = numberPc;
         this.brand = brand;
         this.laboratory = laboratory;
     }
