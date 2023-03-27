@@ -26,6 +26,15 @@ public class ComputerService {
                 "OK"
         );
     }
+    @Transactional(readOnly = true)
+    public Response<List<Computer>> getAllByLaboratory(Long id_laboratory){
+        return new Response<>(
+                this.repository.findAllByLaboratory(id_laboratory),
+                false,
+                200,
+                "OK"
+        );
+    }
     @Transactional(rollbackFor = {SQLException.class})
     public Response<Computer> insert(Computer computer){
         Optional<Computer> exist = this.repository.findBySerial(computer.getSerial());

@@ -34,6 +34,13 @@ public class ComputerController {
                 HttpStatus.OK
         );
     }
+    @GetMapping("laboratory/{id}")
+    public ResponseEntity<Response<List<Computer>>> getAllByLaboratory(@PathVariable Long id){
+        return new ResponseEntity<>(
+                this.service.getAllByLaboratory(id),
+                HttpStatus.OK
+        );
+    }
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
     public ResponseEntity<Response<Computer>> insert(@RequestBody ComputerDto computer){
