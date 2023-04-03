@@ -57,3 +57,5 @@ JSON POST /auth/reset-password FOR USER
 
 *get bitacora depending of the user -> /bitacora/user/{id}
 
+*get computer depending of the laboratory -> /computer/laboratory/{id}
+
