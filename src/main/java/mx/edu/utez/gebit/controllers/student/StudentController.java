@@ -49,8 +49,6 @@ public class StudentController {
                 HttpStatus.OK
         );
     }
-
-    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('USER')")
     @PostMapping("/")
     public ResponseEntity<Response<Student>> insert(@RequestBody StudentDto student){
         return new ResponseEntity<>(
