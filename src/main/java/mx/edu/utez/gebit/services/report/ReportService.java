@@ -26,6 +26,24 @@ public class ReportService {
                 "OK"
         );
     }
+    @Transactional(readOnly = true)
+    public Response<List<Report>> getAllByReason(Long id_reason){
+        return new Response<>(
+                this.repository.findAllByReason(id_reason),
+                false,
+                200,
+                "OK"
+        );
+    }
+    @Transactional(readOnly = true)
+    public Response<List<Report>> getAllByUser(Long user_id){
+        return new Response<>(
+                this.repository.findAllByUser(user_id),
+                false,
+                200,
+                "OK"
+        );
+    }
 
     @Transactional(rollbackFor = {SQLException.class})
     public Response<Report> insert(Report report){

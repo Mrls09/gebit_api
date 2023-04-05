@@ -17,7 +17,7 @@ public interface ComputerRepository extends JpaRepository<Computer, Long> {
 
     Optional<Computer> findAllByBrand(Long id);
 
-    @Query(value = "SELECT * FROM computer c WHERE c.id_laboratory LIKE %?1%", nativeQuery = true)
+    @Query(value = "SELECT * FROM computer c WHERE c.id_laboratory = ?1", nativeQuery = true)
     List<Computer> findAllByLaboratory(Long id_laboratory);
 
 }

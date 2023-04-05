@@ -1,6 +1,7 @@
 package mx.edu.utez.gebit.controllers.report;
 
 import mx.edu.utez.gebit.controllers.report.reportDto.ReportDto;
+import mx.edu.utez.gebit.models.reason.Reason;
 import mx.edu.utez.gebit.models.report.Report;
 import mx.edu.utez.gebit.services.report.ReportService;
 import mx.edu.utez.gebit.utils.Response;
@@ -31,6 +32,20 @@ public class ReportController {
     public ResponseEntity<Response<Report>> getOne(@PathVariable("id") Long id){
         return new ResponseEntity<>(
                 this.service.getOne(id),
+                HttpStatus.OK
+        );
+    }
+    @GetMapping("reason/{id}")
+    public ResponseEntity<Response<List<Report>>> getAllByReason(@PathVariable Long id){
+        return new ResponseEntity<>(
+                this.service.getAllByReason(id),
+                HttpStatus.OK
+        );
+    }
+    @GetMapping("user/{id}")
+    public ResponseEntity<Response<List<Report>>> getAllByUser(@PathVariable Long id){
+        return new ResponseEntity<>(
+                this.service.getAllByUser(id),
                 HttpStatus.OK
         );
     }
