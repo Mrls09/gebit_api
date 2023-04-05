@@ -44,6 +44,21 @@ JSON POST /auth/reset-password FOR USER
     }
 }
 
+JSON POST REPORT -> /report/
+{
+    "description":"Encontre el entorno sucio con palomitas",
+    "status":1,
+    "reason":{
+        "id":2
+    },
+    "computer":{
+        "id":1
+    },
+    "user":{
+        "id":20
+    }
+}
+
 
 *get students with group specific -> /student/grupo/{id} 
 
@@ -59,3 +74,6 @@ JSON POST /auth/reset-password FOR USER
 
 *get computer depending of the laboratory -> /computer/laboratory/{id}
 
+*Get report depending of the user -> /report/user/{id}
+
+*Get Report depending of the reason -> /report/reason/{id}
