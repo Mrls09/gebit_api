@@ -18,6 +18,8 @@ public class BuildingDto {
     private Long id;
     @NotEmpty
     private String name;
+    @NotEmpty
+    private Boolean status;
 
     private List<Laboratory> laboratoryList;
 
@@ -25,6 +27,7 @@ public class BuildingDto {
         return new Building(
                 getId(),
                 getName(),
+                getStatus(),
                 getLaboratoryList()
         );
     }

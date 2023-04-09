@@ -16,11 +16,14 @@ public class ReasonDto {
     private Long id;
     @NotEmpty
     private String name;
+    @NotEmpty
+    private Boolean status;
 
     public Reason getReason(){
         return new Reason(
                 getId(),
-                getName()
+                getName(),
+                getStatus()
         );
     }
 }

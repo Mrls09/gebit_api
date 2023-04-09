@@ -22,6 +22,8 @@ public class Laboratory {
     private String name;
     @Column(nullable = false)
     private Integer capacity;
+    @Column(nullable = false,columnDefinition = "TINYINT DEFAULT 1")
+    private Boolean status;
 
     @ManyToOne()
     @JoinColumn(name = "building_id")
@@ -32,10 +34,11 @@ public class Laboratory {
     private List<Computer> computerList;
 
 
-    public Laboratory(Long id, String name, Integer capacity, Building building, List<Computer> computerList) {
+    public Laboratory(Long id, String name, Integer capacity, Boolean status, Building building, List<Computer> computerList) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
+        this.status = status;
         this.building = building;
         this.computerList = computerList;
     }

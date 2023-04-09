@@ -87,4 +87,24 @@ public class ComputerService {
                 "Computadora no encontrada"
         );
     }
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Computadora no encontrada"
+            );
+        }
+        Computer computer = this.repository.findById(id).get();
+        computer.setStatus(!computer.getStatus());
+        this.repository.saveAndFlush(computer);
+        return new Response<>(
+                computer.getStatus(),
+                false,
+                200,
+                "Computadora actualizado status correctamente"
+        );
+    }
 }

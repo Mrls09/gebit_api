@@ -80,4 +80,24 @@ public class BrandService {
                 "Success update brand"
         );
     }
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Brand no encontrado"
+            );
+        }
+        Brand brand = this.repository.findById(id).get();
+        brand.setStatus(!brand.getStatus());
+        this.repository.saveAndFlush(brand);
+        return new Response<>(
+                brand.getStatus(),
+                false,
+                200,
+                "Brand actualizado status correctamente"
+        );
+    }
 }

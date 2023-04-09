@@ -25,6 +25,7 @@ public class ComputerDto {
     private String model;
 
     private String description;
+    private Boolean status;
 
     private Integer numberPc;
     private Brand brand;
@@ -37,6 +38,7 @@ public class ComputerDto {
                 getSerial(),
                 getModel(),
                 getDescription(),
+                getStatus(),
                 getNumberPc(),
                 getBrand(),
                 getLaboratory()

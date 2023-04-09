@@ -20,7 +20,8 @@ public class Building {
     private Long id;
     @Column(nullable = false, length = 100)
     private String name;
-
+    @Column(nullable = false,columnDefinition = "TINYINT DEFAULT 1")
+    private Boolean status;
     public Building(Long id, String name) {
         this.id = id;
         this.name = name;
@@ -29,10 +30,10 @@ public class Building {
     @JsonIgnore
     private List<Laboratory> laboratoryList;
 
-
-    public Building(Long id, String name, List<Laboratory> laboratoryList) {
+    public Building(Long id, String name, Boolean status, List<Laboratory> laboratoryList) {
         this.id = id;
         this.name = name;
+        this.status = status;
         this.laboratoryList = laboratoryList;
     }
 }

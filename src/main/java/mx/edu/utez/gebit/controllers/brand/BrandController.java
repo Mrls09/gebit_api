@@ -51,4 +51,12 @@ public class BrandController {
                 HttpStatus.OK
         );
     }
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<Boolean>> delete(@PathVariable("id") Long id){
+        return new ResponseEntity<>(
+                this.service.changeStatus(id),
+                HttpStatus.OK
+        );
+    }
 }

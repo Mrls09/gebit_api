@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mx.edu.utez.gebit.models.bitacora.Bitacora;
 import mx.edu.utez.gebit.models.computer.Computer;
 import mx.edu.utez.gebit.models.reason.Reason;
 import mx.edu.utez.gebit.models.report.Report;
@@ -18,7 +19,7 @@ public class ReportDto {
     private String description;
     private Integer status;
     private Reason reason;
-    private Computer computer;
+    private Bitacora bitacora;
     private User user;
 
     public Report getReport(){
@@ -27,7 +28,7 @@ public class ReportDto {
                 getDescription(),
                 getStatus(),
                 getReason(),
-                getComputer(),
+                getBitacora(),
                 getUser()
         );
     }

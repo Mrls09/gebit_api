@@ -88,4 +88,24 @@ public class LaboratoryService {
                 "Se ha actualizado correctamente el laboratorio"
         );
     }
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Laboratorio no econtrado"
+            );
+        }
+        Laboratory laboratory = this.repository.findById(id).get();
+        laboratory.setStatus(!laboratory.getStatus());
+        this.repository.saveAndFlush(laboratory);
+        return new Response<>(
+                laboratory.getStatus(),
+                false,
+                200,
+                "Laboratorio actualizado status correctamente"
+        );
+    }
 }

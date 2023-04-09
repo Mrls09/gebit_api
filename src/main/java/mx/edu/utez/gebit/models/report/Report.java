@@ -3,6 +3,7 @@ package mx.edu.utez.gebit.models.report;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mx.edu.utez.gebit.models.bitacora.Bitacora;
 import mx.edu.utez.gebit.models.computer.Computer;
 import mx.edu.utez.gebit.models.reason.Reason;
 import mx.edu.utez.gebit.security.entity.User;
@@ -26,18 +27,18 @@ public class Report {
     @JoinColumn(name = "reason_id")
     private Reason reason;
     @ManyToOne()
-    @JoinColumn(name = "computer_id")
-    private Computer computer;
+    @JoinColumn(name = "bitacora_id")
+    private Bitacora bitacora;
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Report(Long id, String description, Integer status, Reason reason, Computer computer, User user) {
+    public Report(Long id, String description, Integer status, Reason reason, Bitacora bitacora, User user) {
         this.id = id;
         this.description = description;
         this.status = status;
         this.reason = reason;
-        this.computer = computer;
+        this.bitacora = bitacora;
         this.user = user;
     }
 }

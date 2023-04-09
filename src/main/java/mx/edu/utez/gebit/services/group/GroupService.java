@@ -79,6 +79,24 @@ public class GroupService {
                 "Se ha actualizado correctamente el grupo"
         );
     }
-
-
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Grupo no encontrado"
+            );
+        }
+        Group group = this.repository.findById(id).get();
+        group.setStatus(!group.getStatus());
+        this.repository.saveAndFlush(group);
+        return new Response<>(
+                group.getStatus(),
+                false,
+                200,
+                "Grupo actualizado status correctamente"
+        );
+    }
 }

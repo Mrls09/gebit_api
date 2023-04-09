@@ -21,6 +21,7 @@ public class CareerDto {
     private String name;
     @NotEmpty
     private String abbreviation;
+    private Boolean status;
     private List<Group> groupList;
 
     public Career getCareer(){
@@ -28,6 +29,7 @@ public class CareerDto {
                 getId(),
                 getName(),
                 getAbbreviation(),
+                getStatus(),
                 getGroupList()
         );
     }

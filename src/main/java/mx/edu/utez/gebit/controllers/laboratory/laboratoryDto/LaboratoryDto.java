@@ -21,6 +21,8 @@ public class LaboratoryDto {
     private String name;
     @NotEmpty
     private Integer capacity;
+    @NotEmpty
+    private Boolean status;
 
     private Building building;
 
@@ -31,6 +33,7 @@ public class LaboratoryDto {
                 getId(),
                 getName(),
                 getCapacity(),
+                getStatus(),
                 getBuilding(),
                 getComputerList()
         );

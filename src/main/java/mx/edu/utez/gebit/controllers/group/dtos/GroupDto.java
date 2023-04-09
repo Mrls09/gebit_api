@@ -20,6 +20,8 @@ public class GroupDto {
     @NotEmpty
     private String letter;
     @NotEmpty
+    private Boolean status;
+    @NotEmpty
     private Career career;
 
 
@@ -28,6 +30,7 @@ public class GroupDto {
                 getId(),
                 getDegree(),
                 getLetter(),
+                getStatus(),
                 getCareer()
         );
     }

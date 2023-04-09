@@ -16,12 +16,15 @@ public class BrandDto {
     private Long id;
     @NotEmpty
     private String name;
+    @NotEmpty
+    private Boolean status;
 
 
     public Brand getBrand(){
         return new Brand(
                 getId(),
                 getName(),
+                getStatus(),
                 null
         );
     }

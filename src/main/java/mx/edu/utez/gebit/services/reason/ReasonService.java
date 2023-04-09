@@ -68,4 +68,25 @@ public class ReasonService {
                 "Se ha actualizado correctamente la razon"
         );
     }
+
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Reason no encontrada"
+            );
+        }
+        Reason reason = this.repository.findById(id).get();
+        reason.setStatus(!reason.getStatus());
+        this.repository.saveAndFlush(reason);
+        return new Response<>(
+                reason.getStatus(),
+                false,
+                200,
+                "Reason actuañlizado status correctamente"
+        );
+    }
 }

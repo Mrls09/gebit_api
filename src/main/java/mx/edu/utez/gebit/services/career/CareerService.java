@@ -82,4 +82,24 @@ public class CareerService {
                 "Se ha actualizado correctamente la carrera"
         );
     }
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Carrera no encontrada"
+            );
+        }
+        Career career = this.repository.findById(id).get();
+        career.setStatus(!career.getStatus());
+        this.repository.saveAndFlush(career);
+        return new Response<>(
+                career.getStatus(),
+                false,
+                200,
+                "Carrera status cambiado con exito"
+        );
+    }
 }

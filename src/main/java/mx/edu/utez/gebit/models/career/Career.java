@@ -24,15 +24,18 @@ public class Career {
     private String name;
     @Column(nullable = false, length = 20)
     private String abbreviation;
+    @Column(nullable = false,columnDefinition = "TINYINT DEFAULT 1")
+    private Boolean status;
 
     @OneToMany(mappedBy = "career", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Group> groupList;
 
-    public Career(Long id, String name, String abbreviation, List<Group> groupList) {
+    public Career(Long id, String name, String abbreviation, Boolean status, List<Group> groupList) {
         this.id = id;
         this.name = name;
         this.abbreviation = abbreviation;
+        this.status = status;
         this.groupList = groupList;
     }
 }

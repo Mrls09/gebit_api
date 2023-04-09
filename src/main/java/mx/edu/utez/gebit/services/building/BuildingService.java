@@ -78,6 +78,26 @@ public class BuildingService {
                 "Se ha actualizado correctamente el edificio "
         );
     }
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Edificio no encontrado"
+            );
+        }
+        Building building = this.repository.findById(id).get();
+        building.setStatus(!building.getStatus());
+        this.repository.saveAndFlush(building);
+        return new Response<>(
+                building.getStatus(),
+                false,
+                200,
+                "Edificio actualizado status correctamente"
+        );
+    }
 
 
 }

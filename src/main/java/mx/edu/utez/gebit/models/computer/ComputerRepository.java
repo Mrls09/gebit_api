@@ -3,6 +3,7 @@ package mx.edu.utez.gebit.models.computer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +20,8 @@ public interface ComputerRepository extends JpaRepository<Computer, Long> {
 
     @Query(value = "SELECT * FROM computer c WHERE c.id_laboratory = ?1", nativeQuery = true)
     List<Computer> findAllByLaboratory(Long id_laboratory);
+
+    @Query(value = "UPDATE computer SET status = :status WHERE id = :id ;" , nativeQuery = true)
+    boolean updateStatusById(@Param("status") Boolean status, @Param("id") Long id);
 
 }
