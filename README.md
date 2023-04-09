@@ -47,7 +47,7 @@ JSON POST /auth/reset-password FOR USER
 JSON POST REPORT -> /report/
 {
     "description":"Encontre el entorno sucio con palomitas",
-    "status":1,
+    "status":true,
     "reason":{
         "id":2
     },
