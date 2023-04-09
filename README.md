@@ -51,7 +51,7 @@ JSON POST REPORT -> /report/
     "reason":{
         "id":2
     },
-    "computer":{
+    "bitacora":{
         "id":1
     },
     "user":{
