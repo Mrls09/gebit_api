@@ -1,21 +1,27 @@
 package mx.edu.utez.gebit.services.report;
 
+import mx.edu.utez.gebit.controllers.reason.dtos.ReasonDto;
+import mx.edu.utez.gebit.controllers.report.reportDto.ReportDto;
+import mx.edu.utez.gebit.models.reason.Reason;
+import mx.edu.utez.gebit.models.reason.ReasonRepository;
 import mx.edu.utez.gebit.models.report.Report;
 import mx.edu.utez.gebit.models.report.ReportRepository;
+import mx.edu.utez.gebit.security.entity.User;
 import mx.edu.utez.gebit.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
 public class ReportService {
     @Autowired
     private ReportRepository repository;
+    @Autowired
+    private ReasonRepository reasonRepository;
 
     @Transactional(readOnly = true)
     public Response<List<Report>> getAll(){
@@ -26,6 +32,7 @@ public class ReportService {
                 "OK"
         );
     }
+
     @Transactional(readOnly = true)
     public Response<List<Report>> getAllByReason(Long id_reason){
         return new Response<>(
@@ -47,6 +54,17 @@ public class ReportService {
 
     @Transactional(rollbackFor = {SQLException.class})
     public Response<Report> insert(Report report){
+        Set<Reason> reasons = report.getReasons();
+        StringBuilder sb = new StringBuilder();
+        for (Reason reason : reasons) {
+            sb.append(reasonRepository.findById(reason.getId()).get().getName()).append(", ");
+        }
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - 2); // Elimina la última coma y espacio
+        }
+        String reasonsString = sb.toString();
+        System.out.println(reasonsString); // Imprime los nombres de cada Reason separados por coma
+        report.setReasonString(reasonsString);
         return new Response<>(
                 this.repository.saveAndFlush(report),
                 false,
@@ -54,6 +72,7 @@ public class ReportService {
                 "Reporte registrado correctamente"
         );
     }
+
     @Transactional(readOnly = true)
     public Response<Report> getOne(Long id){
         if(this.repository.existsById(id)){
@@ -73,3 +92,4 @@ public class ReportService {
     }
 
 }
+

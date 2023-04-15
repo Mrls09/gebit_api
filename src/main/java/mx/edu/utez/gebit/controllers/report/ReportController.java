@@ -1,8 +1,12 @@
 package mx.edu.utez.gebit.controllers.report;
 
+import mx.edu.utez.gebit.controllers.reason.dtos.ReasonDto;
 import mx.edu.utez.gebit.controllers.report.reportDto.ReportDto;
 import mx.edu.utez.gebit.models.reason.Reason;
+import mx.edu.utez.gebit.models.reason.ReasonRepository;
 import mx.edu.utez.gebit.models.report.Report;
+import mx.edu.utez.gebit.models.report.ReportRepository;
+import mx.edu.utez.gebit.security.repository.UserRepository;
 import mx.edu.utez.gebit.services.report.ReportService;
 import mx.edu.utez.gebit.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api-gebit/report")
@@ -56,4 +64,5 @@ public class ReportController {
                 HttpStatus.CREATED
         );
     }
+
 }

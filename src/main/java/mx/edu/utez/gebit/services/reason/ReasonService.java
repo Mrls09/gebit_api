@@ -2,6 +2,8 @@ package mx.edu.utez.gebit.services.reason;
 
 import mx.edu.utez.gebit.models.reason.Reason;
 import mx.edu.utez.gebit.models.reason.ReasonRepository;
+import mx.edu.utez.gebit.models.reportReason.ReportReason;
+import mx.edu.utez.gebit.models.reportReason.ReportReasonRepository;
 import mx.edu.utez.gebit.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -89,4 +92,5 @@ public class ReasonService {
                 "Reason actuañlizado status correctamente"
         );
     }
+
 }

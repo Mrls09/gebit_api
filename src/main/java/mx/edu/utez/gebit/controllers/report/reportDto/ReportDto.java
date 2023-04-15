@@ -4,11 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mx.edu.utez.gebit.controllers.reason.dtos.ReasonDto;
 import mx.edu.utez.gebit.models.bitacora.Bitacora;
-import mx.edu.utez.gebit.models.computer.Computer;
 import mx.edu.utez.gebit.models.reason.Reason;
 import mx.edu.utez.gebit.models.report.Report;
 import mx.edu.utez.gebit.security.entity.User;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,19 +23,19 @@ public class ReportDto {
     private Long id;
     private String description;
     private Integer status;
-    private Reason reason;
     private Bitacora bitacora;
     private User user;
+    private Set<Reason> reasons = new HashSet<>();
 
-    public Report getReport(){
+    public Report getReport() {
         return new Report(
                 getId(),
                 getDescription(),
                 getStatus(),
-                getReason(),
                 getBitacora(),
-                getUser()
+                getUser(),
+                getReasons()
         );
     }
-
 }
+

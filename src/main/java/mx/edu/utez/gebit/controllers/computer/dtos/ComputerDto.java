@@ -23,11 +23,9 @@ public class ComputerDto {
     private String serial;
     @NotEmpty
     private String model;
-
     private String description;
     private Boolean status;
-
-    private Integer numberPc;
+    private Long numberPc;
     private Brand brand;
 
     private Laboratory laboratory;

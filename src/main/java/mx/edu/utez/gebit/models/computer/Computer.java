@@ -26,7 +26,7 @@ public class Computer {
     @Column(nullable = false,columnDefinition = "TINYINT DEFAULT 1")
     private Boolean status;
     @Column
-    private Integer numberPc;
+    private Long numberPc;
     @ManyToOne
     @JoinColumn(name = "id_brand", nullable = false)
     private Brand brand;
@@ -35,8 +35,7 @@ public class Computer {
     @JoinColumn(name = "id_laboratory", nullable = false)
     private Laboratory laboratory;
 
-
-    public Computer(Long id, String serial, String model, String description, Boolean status, Integer numberPc, Brand brand, Laboratory laboratory) {
+    public Computer(Long id, String serial, String model, String description, Boolean status, Long numberPc, Brand brand, Laboratory laboratory) {
         this.id = id;
         this.serial = serial;
         this.model = model;
