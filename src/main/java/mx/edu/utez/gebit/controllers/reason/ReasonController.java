@@ -26,6 +26,13 @@ public class ReasonController {
                 HttpStatus.OK
         );
     }
+    @GetMapping("count/")
+    public ResponseEntity<Response<List<Object[]>>> getCount(){
+        return new ResponseEntity<>(
+                this.service.getCount(),
+                HttpStatus.OK
+        );
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Response<Reason>> getOne(@PathVariable("id") Long id){

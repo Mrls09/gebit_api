@@ -15,5 +15,6 @@ public interface ReasonRepository extends JpaRepository<Reason, Long> {
     Optional<Reason> findById(Long aLong);
     @Query(value = "SELECT * FROM report_reason r WHERE r.user_id = ?1", nativeQuery = true)
     List<Report> findAllByUser(Long user_id);
-
+    @Query(nativeQuery = true, value = "SELECT rr.reason_fk, r.name, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM report_reason) as percentage FROM report_reason rr JOIN reason r ON rr.reason_fk = r.id GROUP BY rr.reason_fk, r.name")
+    List<Object[]> getReasonAverages();
 }

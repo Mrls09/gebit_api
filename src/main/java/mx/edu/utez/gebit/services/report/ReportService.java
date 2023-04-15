@@ -1,12 +1,9 @@
 package mx.edu.utez.gebit.services.report;
 
-import mx.edu.utez.gebit.controllers.reason.dtos.ReasonDto;
-import mx.edu.utez.gebit.controllers.report.reportDto.ReportDto;
 import mx.edu.utez.gebit.models.reason.Reason;
 import mx.edu.utez.gebit.models.reason.ReasonRepository;
 import mx.edu.utez.gebit.models.report.Report;
 import mx.edu.utez.gebit.models.report.ReportRepository;
-import mx.edu.utez.gebit.security.entity.User;
 import mx.edu.utez.gebit.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +29,7 @@ public class ReportService {
                 "OK"
         );
     }
+
 
     @Transactional(readOnly = true)
     public Response<List<Report>> getAllByReason(Long id_reason){

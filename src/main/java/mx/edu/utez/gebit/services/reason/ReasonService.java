@@ -2,8 +2,6 @@ package mx.edu.utez.gebit.services.reason;
 
 import mx.edu.utez.gebit.models.reason.Reason;
 import mx.edu.utez.gebit.models.reason.ReasonRepository;
-import mx.edu.utez.gebit.models.reportReason.ReportReason;
-import mx.edu.utez.gebit.models.reportReason.ReportReasonRepository;
 import mx.edu.utez.gebit.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +21,15 @@ public class ReasonService {
     public Response<List<Reason>> getAll(){
         return new Response<>(
                 this.repository.findAll(),
+                false,
+                200,
+                "OK"
+        );
+    }
+    @Transactional(readOnly = true)
+    public Response<List<Object[]>> getCount(){
+        return new Response<>(
+                this.repository.getReasonAverages(),
                 false,
                 200,
                 "OK"
