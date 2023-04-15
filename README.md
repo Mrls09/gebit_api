@@ -46,18 +46,25 @@ JSON POST /auth/reset-password FOR USER
 
 JSON POST REPORT -> /report/
 {
-    "description":"Encontre el entorno sucio con palomitas",
-    "status":true,
-    "reason":{
-        "id":2
+    "description": "Reporte de prueba",
+    "status": 1,
+    "bitacora": {
+        "id": 1
     },
-    "bitacora":{
-        "id":1
+    "user": {
+        "id": 2
     },
-    "user":{
-        "id":20
-    }
+    "reasons": [
+        {
+            "id": 1
+        },
+        {
+            "id": 2
+        }
+    ]
 }
+
+
 
 
 *get students with group specific -> /student/grupo/{id} 
