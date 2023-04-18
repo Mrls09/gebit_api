@@ -84,3 +84,5 @@ JSON POST REPORT -> /report/
 *Get report depending of the user -> /report/user/{id}
 
 *Get Report depending of the reason -> /report/reason/{id}
+
+*Get Reason count for graph -> /api-gebit/reason/count/
