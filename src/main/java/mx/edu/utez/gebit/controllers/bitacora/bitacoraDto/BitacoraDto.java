@@ -10,6 +10,7 @@ import mx.edu.utez.gebit.security.entity.User;
 
 import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @AllArgsConstructor
@@ -19,16 +20,21 @@ import java.sql.Timestamp;
 public class BitacoraDto {
     private Long id;
 
+    @NotEmpty
     private Timestamp created_at;
 
-    private Computer computer;
+    private Timestamp finish_at;
 
+    @NotEmpty
+    private Computer computer;
+    @NotEmpty
     private User user;
 
     public Bitacora getBitacora(){
         return new Bitacora(
                 getId(),
                 getCreated_at(),
+                getFinish_at(),
                 getComputer(),
                 getUser()
         );

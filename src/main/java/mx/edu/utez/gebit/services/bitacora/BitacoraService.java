@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -51,6 +54,27 @@ public class BitacoraService {
                 "Bitacora Registrada"
         );
     }
+    @Transactional(rollbackFor =  {SQLException.class})
+    public Response<Bitacora> finish(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Bitacora no encontrada"
+            ) ;
+        }
+        Bitacora bitacora = repository.findById(id).get();
+        LocalDateTime horaActual = LocalDateTime.now();
+        bitacora.setFinish_at(Timestamp.valueOf(horaActual));
+        repository.saveAndFlush(bitacora);
+        return new Response<>(
+                this.repository.saveAndFlush(bitacora),
+                false,
+                200,
+                "Se registro la salida"
+        );
+    }
     @Transactional(readOnly = true)
     public Response<List<Bitacora>> getAllByUser(Long id){
         return new Response<>(
@@ -69,4 +93,5 @@ public class BitacoraService {
                 "OK"
         );
     }
+
 }

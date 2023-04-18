@@ -54,4 +54,11 @@ public class BitacoraController {
                 HttpStatus.CREATED
         );
     }
+    @PutMapping("end/{id}")
+    public ResponseEntity<Response<Bitacora>> finish(@PathVariable Long id){
+        return new ResponseEntity<>(
+                this.service.finish(id),
+                HttpStatus.OK
+        );
+    }
 }
