@@ -4,6 +4,7 @@ import mx.edu.utez.gebit.security.entity.User;
 import mx.edu.utez.gebit.security.repository.UserRepository;
 import mx.edu.utez.gebit.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,5 +61,26 @@ public class UserService {
                 200,
                 "Contraseña cambiada correctamente"
         );
+    }
+
+    public void updateResetPasswordToken(String token, String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+        if(user != null) {
+            user.setResetPasswordToken(token);
+            userRepository.save(user);
+        }else{
+            throw  new UsernameNotFoundException("Could not find any user with the username " + email);
+        }
+    }
+    public User getByResetPasswordToken(String token){
+        return userRepository.findByResetPasswordToken(token);
+    }
+
+    public void updatePassword(User user, String newPassword) {
+        String encodePassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodePassword);
+
+        user.setResetPasswordToken(null);
+        userRepository.saveAndFlush(user);
     }
 }

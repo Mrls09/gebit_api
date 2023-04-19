@@ -61,6 +61,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api-gebit/auth/**").permitAll()
+                .antMatchers("/api-gebit/reset/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api-gebit/reset-password").permitAll()//Permite apuntar sin necesidad de token
                 .antMatchers(HttpMethod.POST,"/api-gebit/student/").permitAll()
                 .antMatchers(HttpMethod.GET, "/api-gebit/group/").permitAll()

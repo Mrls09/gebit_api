@@ -26,6 +26,8 @@ public class User {
     @NotNull
     private String password;
 
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
 
     @NotNull
     @ManyToMany
