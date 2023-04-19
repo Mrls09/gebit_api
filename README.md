@@ -69,9 +69,7 @@ JSON POST REPORT -> /report/
 
 *get students with group specific -> /student/grupo/{id} 
 
-
 *get students with status -> /student/status/{status} (Value Boolean)  
-
 
 *get laboratory with building specific -> /laboratory/builging/{id}
 
@@ -84,5 +82,9 @@ JSON POST REPORT -> /report/
 *Get report depending of the user -> /report/user/{id}
 
 *Get Report depending of the reason -> /report/reason/{id}
+
+*GET REPORT SOLUCIONADO http://localhost:8080/api-gebit/report/finalizados/
+
+*GET REPORT PENDIENTE http://localhost:8080/api-gebit/report/pendientes/
 
 *Get Reason count for graph -> /api-gebit/reason/count/
