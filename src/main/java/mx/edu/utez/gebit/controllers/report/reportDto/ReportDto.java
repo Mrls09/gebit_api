@@ -22,7 +22,7 @@ import java.util.Set;
 public class ReportDto {
     private Long id;
     private String description;
-    private Integer status;
+    private Boolean status;
     private Bitacora bitacora;
     private User user;
     private Set<Reason> reasons = new HashSet<>();

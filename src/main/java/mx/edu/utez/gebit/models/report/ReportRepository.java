@@ -19,6 +19,7 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     @Query(value = "SELECT * FROM report r WHERE r.user_id = ?1", nativeQuery = true)
     List<Report> findAllByUser(Long user_id);
 
-
+    @Query(value = "SELECT * FROM report r WHERE r.status = ?1", nativeQuery = true)
+    List<Report> findAllByStatus(Boolean status);
 
 }

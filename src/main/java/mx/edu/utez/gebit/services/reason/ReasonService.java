@@ -96,7 +96,7 @@ public class ReasonService {
                 reason.getStatus(),
                 false,
                 200,
-                "Reason actuañlizado status correctamente"
+                "Reason actualizado status correctamente"
         );
     }
 

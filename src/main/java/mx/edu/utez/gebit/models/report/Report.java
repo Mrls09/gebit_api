@@ -27,8 +27,7 @@ public class Report {
     @Column
     private String reasonString;
     @Column(nullable = false)
-    private Integer status;
-
+    private Boolean status;
     @ManyToOne()
     @JoinColumn(name = "bitacora_id")
     private Bitacora bitacora;
@@ -44,7 +43,7 @@ public class Report {
     )
     private Set<Reason> reasons = new HashSet<>();
 
-    public Report(Long id, String description, Integer status, Bitacora bitacora, User user, Set<Reason> reasons) {
+    public Report(Long id, String description, Boolean status, Bitacora bitacora, User user, Set<Reason> reasons) {
         this.id = id;
         this.description = description;
         this.status = status;

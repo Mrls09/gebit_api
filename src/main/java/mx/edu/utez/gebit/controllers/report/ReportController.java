@@ -36,6 +36,20 @@ public class ReportController {
                 HttpStatus.OK
         );
     }
+    @GetMapping("pendientes/")
+    public ResponseEntity<Response<List<Report>>> getAllTrue(){
+        return new ResponseEntity<>(
+                this.service.getAllTrue(),
+                HttpStatus.OK
+        );
+    }
+    @GetMapping("finalizados/")
+    public ResponseEntity<Response<List<Report>>> getAllFalse(){
+        return new ResponseEntity<>(
+                this.service.getAllFalse(),
+                HttpStatus.OK
+        );
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Response<Report>> getOne(@PathVariable("id") Long id){
         return new ResponseEntity<>(
@@ -62,6 +76,14 @@ public class ReportController {
         return new ResponseEntity<>(
                 this.service.insert(report.getReport()),
                 HttpStatus.CREATED
+        );
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<Boolean>> changeStatus(@PathVariable("id") Long id){
+        return new ResponseEntity<>(
+                this.service.changeStatus(id),
+                HttpStatus.OK
         );
     }
 

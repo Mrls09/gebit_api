@@ -29,7 +29,24 @@ public class ReportService {
                 "OK"
         );
     }
-
+    @Transactional(readOnly = true)
+    public Response<List<Report>> getAllTrue(){
+        return new Response<>(
+                this.repository.findAllByStatus(true),
+                false,
+                200,
+                "OK"
+        );
+    }
+    @Transactional(readOnly = true)
+    public Response<List<Report>> getAllFalse(){
+        return new Response<>(
+                this.repository.findAllByStatus(false),
+                false,
+                200,
+                "OK"
+        );
+    }
 
     @Transactional(readOnly = true)
     public Response<List<Report>> getAllByReason(Long id_reason){
@@ -86,6 +103,26 @@ public class ReportService {
                 true,
                 400,
                 "Reporte no encontrado"
+        );
+    }
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Reporte no encontrado"
+            );
+        }
+        Report report = this.repository.findById(id).get();
+        report.setStatus(!report.getStatus());
+        this.repository.saveAndFlush(report);
+        return new Response<>(
+                report.getStatus(),
+                false,
+                200,
+                "Reporte status actualizado correctamente"
         );
     }
 
