@@ -103,7 +103,6 @@ public class StudentService {
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolName(RolName.ROLE_USER).get());
         student.getUser().setRoles(roles);
-
         return new Response<>(
                 this.repository.saveAndFlush(student),
                 false,
@@ -122,16 +121,6 @@ public class StudentService {
                     "Estudiante no encontrado"
             );
         }
-        /*if(student.getUser().getPassword() != null){
-            student.getUser().setPassword(
-                    encoder.encode(
-                            student.getUser().getPassword()
-                    )
-            );
-        }
-        Set<Rol> roles = new HashSet<>();
-        roles.add(rolService.getByRolName(RolName.ROLE_USER).get());
-        student.getUser().setRoles(roles);*/
         if(student.getLastname()!=null){
             student1.setLastname(student.getLastname());
             System.out.println("SI TRAE APELLIDO");
@@ -140,12 +129,32 @@ public class StudentService {
             student1.setName(student.getName());
             System.out.println("SI TRAE NOMBRE");
         }
-
         return new Response<>(
                 this.repository.saveAndFlush(student1),
                 false,
                 200,
                 "Se ha actualizado correctamente el estudiante"
+        );
+    }
+
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id) {
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Estudiante no encontrado"
+            );
+        }
+        Student student = this.repository.findById(id).get();
+        student.setStatus(!student.getStatus());
+        this.repository.saveAndFlush(student);
+        return new Response<>(
+                student.getStatus(),
+                false,
+                200,
+                "Status de estudiante actualizado"
         );
     }
 

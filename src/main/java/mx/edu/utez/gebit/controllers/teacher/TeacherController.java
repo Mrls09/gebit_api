@@ -47,4 +47,12 @@ public class TeacherController {
                 HttpStatus.OK
         );
     }
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<Boolean>> changeStatus(@PathVariable("id") Long id){
+        return new ResponseEntity<>(
+                this.service.changeStatus(id),
+                HttpStatus.OK
+        );
+    }
 }

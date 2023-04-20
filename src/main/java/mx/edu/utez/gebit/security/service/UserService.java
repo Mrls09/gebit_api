@@ -9,9 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLDataException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,15 +23,6 @@ public class UserService {
     public Optional<User> getByUser(String username){
         return userRepository.findByUsername(username);
     }
-
-    public Boolean existByUser(String username){
-        return userRepository.existsByUsername((username));
-    }
-
-    public void save(User user){
-        userRepository.save(user);
-    }
-
 
     @Transactional(rollbackFor = {SQLException.class})
     public Response<User> updatePassword(String username,String password, String newPass){

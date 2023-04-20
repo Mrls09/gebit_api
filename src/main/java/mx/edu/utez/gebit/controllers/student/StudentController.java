@@ -5,6 +5,7 @@ import mx.edu.utez.gebit.models.group.Group;
 import mx.edu.utez.gebit.models.student.Student;
 import mx.edu.utez.gebit.services.student.StudentService;
 import mx.edu.utez.gebit.utils.Response;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,7 +65,12 @@ public class StudentController {
                 HttpStatus.OK
         );
     }
-
-
-
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<Boolean>> changeStatus(@PathVariable("id") Long id){
+        return new ResponseEntity<>(
+                this.service.changeStatus(id),
+                HttpStatus.OK
+        );
+    }
 }

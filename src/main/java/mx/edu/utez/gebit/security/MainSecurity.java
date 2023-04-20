@@ -20,9 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-//con perPostEnabled se usa para indicar a q metodos puede acceder solo el admin
-// Los metodos que no lleven anotación pueden acceder el admin como un generic user
-// @preauthorized solo puede acceder el admin
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MainSecurity extends WebSecurityConfigurerAdapter {
     @Autowired

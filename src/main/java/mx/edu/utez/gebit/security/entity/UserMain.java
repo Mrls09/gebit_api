@@ -1,6 +1,7 @@
 package mx.edu.utez.gebit.security.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @Getter
 public class UserMain implements UserDetails {
     private String username;
+    @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 

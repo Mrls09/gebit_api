@@ -114,4 +114,25 @@ public class TeacherService {
                 "Se ha actualizado correctamente el profesor"
         );
     }
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Boolean> changeStatus(Long id){
+        if(!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "Profesor no encontrado"
+            );
+        }
+        Teacher teacher = this.repository.findById(id).get();
+        teacher.setStatus(!teacher.getStatus());
+        this.repository.saveAndFlush(teacher);
+        return new Response<>(
+                teacher.getStatus(),
+                false,
+                200,
+                "Se actualizo el estatus del profesor correctamente"
+        );
+    }
+
 }

@@ -21,7 +21,7 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("/api-gebit/reset")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://192.168.137.90:3000")
 public class ForgotPasswordController {
 
     @Autowired
@@ -34,16 +34,14 @@ public class ForgotPasswordController {
     public Response<Object> processForgotPassword(@RequestBody RecoverUser user, Model model) {
         String email = user.getUsername();
         String token = RandomString.make(30);
-        String url = "http://localhost:3000/";
+        String url = "http://192.168.137.90:3000/";
         try {
             userService.updateResetPasswordToken(token, email);
             String resetPasswordLink = url + "reset_password?token=" + token;
             sendEmail(email, resetPasswordLink);
-            model.addAttribute("Message","We have sent a reset password link to your email. Please check." );
         } catch (UsernameNotFoundException ex){
-            model.addAttribute("error", ex.getMessage());
+            System.out.println("catch" + ex);
         }catch (UnsupportedEncodingException | MessagingException e) {
-            model.addAttribute("error", "Error while sending email");
         }
         return new Response<>(
                 user.getUsername(),
@@ -60,13 +58,69 @@ public class ForgotPasswordController {
 
         String subject = "Link para restablecer tu contraseña de Gebit";
 
-        String content = "<p>Hola,</p>"
+        /*String content = "<p>Hola,</p>"
                 + "<p>Haz solicitado cambiar tu contraseña</p>"
                 + "<p>Da click en el siguiente enlace</p>"
                 + "<p><a href=\"" + link + "\">Cambiar contraseña</a></p>"
                 + "<br>"
                 + "<p>Si tu no haz solicitado un cambio de contraseña, "
-                + "ignora este correo. </p>";
+                + "ignora este correo. </p>";*/
+
+        String content = "<!DOCTYPE html>\n" +
+                "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n" +
+                "<head>\n" +
+                "  <meta charset=\"UTF-8\">\n" +
+                "  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n" +
+                "  <meta name=\"x-apple-disable-message-reformatting\">\n" +
+                "  <title></title>\n" +
+                "  <!--[if mso]>\n" +
+                "  <noscript>\n" +
+                "    <xml>\n" +
+                "      <o:OfficeDocumentSettings>\n" +
+                "        <o:PixelsPerInch>96</o:PixelsPerInch>\n" +
+                "      </o:OfficeDocumentSettings>\n" +
+                "    </xml>\n" +
+                "  </noscript>\n" +
+                "  <![endif]-->\n" +
+                "  <style>\n" +
+                "    table, td, div, h1, p {font-family: Arial, sans-serif;}\n" +
+                "  </style>\n" +
+                "</head>\n" +
+                "<body style=\"margin:0;padding:0;\">\n" +
+                "  <table role=\"presentation\" style=\"width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;\">\n" +
+                "    <tr>\n" +
+                "      <td align=\"center\" style=\"padding:0;\">\n" +
+                "        <table role=\"presentation\" style=\"width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;\">\n" +
+                "          <tr>\n" +
+                "            <td align=\"center\" style=\"padding:40px 0 30px 0;background:#70bbd9;\">\n" +
+                "              <img src=\"https://assets.codepen.io/210284/h1.png\" alt=\"\" width=\"300\" style=\"height:auto;display:block;\" />\n" +
+                "            </td>\n" +
+                "          </tr>\n" +
+                "          <tr>\n" +
+                "            <td style=\"padding:36px 30px 42px 30px;\">\n" +
+                "              <table role=\"presentation\" style=\"width:100%;border-collapse:collapse;border:0;border-spacing:0;\">\n" +
+                "                <tr>\n" +
+                "                  <td style=\"padding:0 0 36px 0;color:#153643;\">\n" +
+                "                    <h1 style=\"font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;\">Recuperación de contraseña GEBIT</h1>\n" +
+                "                    <p><a href=\"" + link + "\">Cambiar contraseña</a></p>\n" +
+                "                    <p style=\"margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;\"><a href=\"http://www.example.com\" style=\"color:#ee4c50;text-decoration:underline;\">In tempus felis blandit</a></p>\n" +
+                "                  </td>\n" +
+                "                </tr>\n" +
+                "              </table>\n" +
+                "            </td>\n" +
+                "          </tr>\n" +
+                "              </table>\n" +
+                "            </td>\n" +
+                "          </tr>\n" +
+                "        </table>\n" +
+                "      </td>\n" +
+                "    </tr>\n" +
+                "  </table>\n" +
+                "</body>\n" +
+                "</html>";
+
+        //<p><a href=\"" + link + "\">Cambiar contraseña</a></p>
+
 
         helper.setSubject(subject);
 
